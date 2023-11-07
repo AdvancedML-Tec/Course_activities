@@ -176,4 +176,4 @@ ipython_config.py
 data/*/*
 
 # But do not ignore the directories themselves
-!data/*/
+!data/*/.gitkeep
