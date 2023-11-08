@@ -177,3 +177,6 @@ data/*/*
 
 # But do not ignore the directories themselves
 !data/*/.gitkeep
+
+# Ignore .pdf files
+*.pdf
