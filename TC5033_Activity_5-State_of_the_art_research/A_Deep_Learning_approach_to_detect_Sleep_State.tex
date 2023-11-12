@@ -412,16 +412,16 @@ Where \( r \) is the rank of each relevant document, \( R \) is the total number
 
 In this evaluation, predictions that align with the ground-truth and exceed the threshold are labeled as TP. Predictions that don't match are labeled as FP, while ground-truths without a corresponding prediction are labeled as FN.
 
-
 \[
 \text{Score}(x) = 
 \begin{cases} 
-\text{TP} & \text{if } x \text{ is a matched prediction and } x > \text{threshold} \\
-\text{FP} & \text{if } x \text{ is an unmatched prediction} \\
-\text{FN} & \text{if } x \text{ is an unmatched ground-truth} \\
-\text{TN} & \text{otherwise }
+\text{TP} & \text{if }x \text{ matched and } x > \text{thresh.} \\
+\text{FP} & \text{if }x \text{ unmatched pred.} \\
+\text{FN} & \text{if }x \text{ unmatched truth} \\
+\text{TN} & \text{otherwise}
 \end{cases}
 \]
+
 
 \section{Conclusion}
 
