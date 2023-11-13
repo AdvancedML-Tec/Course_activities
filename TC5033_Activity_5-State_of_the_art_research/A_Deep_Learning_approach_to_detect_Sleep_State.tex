@@ -390,15 +390,27 @@ This investigation proposes a cutting-edge project that employs deep learning te
 
 \section{Introduction}
 
+This paper presents a project proposal rooted in the practical application of a Kaggle competition, aimed at addressing a challenge in pediatric health and neuroscience: the identification of sleep states in children through wrist-worn accelerometer data. The competition serves as a catalyst for innovation, prompting the development of a sophisticated machine learning model capable of discerning the subtle onset of various sleep states and periods of wakefulness with precision.
+
+The significance of this project lies in its potential to deepen our understanding of sleep and to provide further insights into its importance. For instance, understanding how environmental factors influence sleep, mood, and behavior can aid in formulating personalized strategies tailored to the unique needs of each child \cite{child-mind-institute-detect-sleep-states}. Furthermore, the outcomes of this project could enable researchers to undertake more comprehensive, large-scale sleep studies across a variety of populations and contexts, which could yield even more valuable information about sleep \cite{child-mind-institute-detect-sleep-states}.
+
+
 \section{Literature Review}
+
+For this type of problem, a Machine Learning approach based on Random Forest has proven effective in detecting sleep-wake states, nonwear versus wear, and sleep stage classification \cite{Sundararajan2021}. An initial attempt was made using a Residual Neural Network (RNN), specifically a ResNet initialized with a Glorot uniform initializer and employing LeakyReLU activations \cite{Sundararajan2021}. However, when testing this approach with the Amsterdam dataset, which consists of data collected from 114 individuals recruited by the VU University Medical Center in Amsterdam, The Netherlands \cite{teLindert2020}, it was observed that the Random Forest approach outperformed the ResNet heuristic. Notably, the ResNet had difficulties with wake state prediction \cite{Sundararajan2021}. 
+
+It is important to note that the analyzed information for sleep state detection can come from different types of devices, from example from an optical plethysmography and accelerometer signals \cite{Beattie_2017} \cite{Fedorin2019}, depending on the research. Specifically, there are cases in which the data is extracted from accelerometers among other types of sensors. Therefore, the methods utilized in each case serve as a baseline for their respective projects, this means that couldn't be possible a suitable that generalize over the data coming from different sources.
+
 
 \section{Future Directions}
 
-The ultimate goal is to apply a developed Deep Learning architecture to the dataset provided by \cite{child-mind-institute-detect-sleep-states} % TODO
+The ultimate goal is to apply a developed Deep Learning architecture to the dataset provided by \cite{child-mind-institute-detect-sleep-states}. Our primary motivation lies in the use of deep learning methods for time series analysis, particularly with the "Detect Sleep States" dataset furnished by the Child Mind Institute \cite{child-mind-institute-detect-sleep-states}, which consists of approximately 500 multi-day recordings from wrist-mounted accelerometers. The accelerometer data in the dataset was processed using R with the GGIR package \cite{Migueles2019GGIR}. The recordings are labeled with two event types: 'onset', indicating the start of sleep, and 'wakeup', marking its end. The primary objective is to identify these two events within the accelerometer data series.
+
 
 \subsection{Exploratory Data Analysis}
 
 We are planning to start with Exploratory Data Analysis of the dataset % TODO
+
 
 \subsection{Model Evaluation}
 
@@ -425,7 +437,7 @@ In this evaluation, predictions that align with the ground-truth and exceed the 
 
 \section{Conclusion}
 
-To address this challenge, we want to continue over implementing deep learning techniques, despite evidence from \cite{Sundararajan2021} indicating that traditional methods such as Random Forest outperform ResNets. Our motivation stems from the insights gained from \cite{Zhang2023}, where the authors present the Time-Series Neural Network (TNN). This method, which incorporates a Kernel Filter alongside a Time Attention Mechanism \cite{Zhang2023}, has demonstrated high accuracy in forecasting. In our specific context, we are in the process of evaluating whether Long Short-Term Memory Networks (LSTM), Graph Neural Networks (GNN), or potentially an attention-based mechanism would be most effective for our application.
+To address this challenge, we want to continue over implementing deep learning techniques, despite evidence from \cite{Sundararajan2021} indicating that traditional methods such as Random Forest outperform ResNets. Our motivation stems from the insights gained from \cite{Zhang2023}, where the authors present the Time-Series Neural Network (TNN). This method, which incorporates a Kernel Filter alongside a Time Attention Mechanism \cite{Zhang2023}, has demonstrated high accuracy in forecasting. In our specific context, we are in the process of evaluating whether Long Short-Term Memory Networks (LSTM), Graph Neural Networks (GNN), or potentially an attention-based mechanism would be most suitable for our application.
 
 
 
