@@ -368,7 +368,7 @@ Email: a01200230@tec.mx}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-This investigation proposes a cutting-edge project that employs deep learning techniques to complex the intricate task of detecting sleep states using accelerometer data from wrist-worn devices. The abstract presents the project's conception, detailing the initial phase focused on examining the state-of-the-art methods employed. Central to this proposal is the development of a tailored deep learning solution for analyzing and predicting time-series data from wrist-worn devices to accurately identify sleep states. The research will conduct an extensive review and critical evaluation of various deep learning architectures, comparing them with other machine learning strategies to determine the most effective method. The overarching aim is to create a reliable predictive model that significantly improves the precision and dependability of sleep state classification leveraging data from wearable technology.
+This investigation proposes a project that utilizes deep learning techniques to address the complex task of detecting sleep states using accelerometer data from wrist-worn devices. This research include a review and critical evaluation of various deep learning architectures, comparing them with other machine learning strategies to determine the most effective approach. With an initial focus on examining state-of-the-art methods, central to this proposal is the development of a deep learning solution for analyzing and predicting time-series data from these wrist-worn devices to accurately identify sleep states. The overarching aim is to implement a reliable predictive model that significantly enhances the precision and dependability of sleep state classification using data from wearable technology.
 \end{abstract}
 
 % no keywords
@@ -393,36 +393,37 @@ This investigation proposes a cutting-edge project that employs deep learning te
 This paper presents a project proposal rooted in the practical application of a Kaggle competition, aimed at addressing a challenge in pediatric health and neuroscience: the identification of sleep states in children through wrist-worn accelerometer data. The competition serves as a catalyst for innovation, prompting the development of a sophisticated machine learning model capable of discerning the subtle onset of various sleep states and periods of wakefulness with precision.
 
 The significance of this project lies in its potential to deepen our understanding of sleep and to provide further insights into its importance. For instance, understanding how environmental factors influence sleep, mood, and behavior can aid in formulating personalized strategies tailored to the unique needs of each child \cite{child-mind-institute-detect-sleep-states}. Furthermore, the outcomes of this project could enable researchers to undertake more comprehensive, large-scale sleep studies across a variety of populations and contexts, which could yield even more valuable information about sleep \cite{child-mind-institute-detect-sleep-states}.
-
+  
 
 \section{Literature Review}
 
-For this type of problem, a Machine Learning approach based on Random Forest has proven effective in detecting sleep-wake states, nonwear versus wear, and sleep stage classification \cite{Sundararajan2021}. An initial attempt was made using a Residual Neural Network (RNN), specifically a ResNet initialized with a Glorot uniform initializer and employing LeakyReLU activations \cite{Sundararajan2021}. However, when testing this approach with the Amsterdam dataset, which consists of data collected from 114 individuals recruited by the VU University Medical Center in Amsterdam, The Netherlands \cite{teLindert2020}, it was observed that the Random Forest approach outperformed the ResNet heuristic. Notably, the ResNet had difficulties with wake state prediction \cite{Sundararajan2021}. 
+For this type of problem, a Machine Learning approach based on Random Forest has proven effective in detecting sleep-wake states, non-wear versus wear, and sleep stage classification \cite{Sundararajan2021}. An initial attempt was made using a Residual Neural Network (RNN), specifically a ResNet initialized with a Glorot uniform initializer and employing LeakyReLU activations \cite{Sundararajan2021}. However, when testing this approach with the Amsterdam dataset, which consists of data collected from 114 individuals recruited by the VU University Medical Center in Amsterdam, The Netherlands \cite{teLindert2020}, it was observed that the Random Forest approach outperformed the ResNet heuristic. Notably, the ResNet had difficulties with wake state prediction \cite{Sundararajan2021}. However, it is important to remark that most the used data was collected with the GENActiv accelerometer brand, it should be consider future studies to assess model transferability across other accelerometer brands \cite{Sundararajan2021}.
 
-It is important to note that the analyzed information for sleep state detection can come from different types of devices, from example from an optical plethysmography and accelerometer signals \cite{Beattie_2017} \cite{Fedorin2019}, depending on the research. Specifically, there are cases in which the data is extracted from accelerometers among other types of sensors. Therefore, the methods utilized in each case serve as a baseline for their respective projects, this means that couldn't be possible a suitable that generalize over the data coming from different sources.
+We explored another approach that analyzes data from the VU University Medical Center in Amsterdam, The Netherlands \cite{teLindert2020}. Unlike machine learning methods, this study employed Latent Class Analysis (LCA), a statistical method rather than a machine learning or deep learning technique. LCA, commonly used in social, psychological, and behavioral sciences, identifies latent classes within populations sharing common characteristics \cite{qing2023}. In their study, LCA was utilized to differentiate subtypes of sleep misperception among individuals using data from actigraphy and sleep diaries from the people in their studies \cite{teLindert2020}. Sleep misperception, in this context, is the discrepancy between subjectively perceived and objectively measured sleep, crucial for understanding disorders like Insomnia Disorder \cite{teLindert2020}. This study, focusing on a statistical categorical approach to classify sleep misperception, falls outside our scope.
+
+Also, it is important to note that the analyzed information for sleep state detection can come from different types of devices, from example from an optical plethysmography and accelerometer signals \cite{Beattie_2017} \cite{Fedorin2019}, depending on the research. Specifically, there are cases in which the data is extracted from accelerometers among other types of sensors. Therefore, the methods utilized in each case serve as a baseline for their respective projects, this means that couldn't be possible a suitable that generalize over the data coming from different sources.
+
+Understanding the clinical implications of devices employed for sleep state detection is crucial. Accelerometry is frequently utilized as a cost-effective method for assessing sleep states. However, it appears that traditional machine learning algorithms may have limitations in accuracy, particularly in patients with insomnia \cite{Sundararajan2021}. There exists both an opportunity and a growing interest in refining these algorithms by enhancing the accuracy of accelerometry could transform it into a more clinically valuable tool, enabling the measurement of sleep and wakefulness over prolonged periods \cite{Sundararajan2021}.
+
+Despite evidence suggesting that classical methods, such as Support Vector Machines, effectively detect sleep states and may outperform Deep Learning methods in specific scenarios with data from actigraph devices that recorded signals using a microelectromechanical system (MEMS) accelerometer \cite{teLindert2020}, similar to the GENActiv accelerometer \cite{Sundararajan2021}, were analyzed., we explored alternative approaches. Our investigation revealed the deployment of Deep Learning and other Machine Learning models for detecting sleep states from various source signals. These include electrocardiography (ECG), which measures the heart's electrical activity \cite{Stuburic2020}, or electroencephalogram (EEG), employing electrodes on the scalp to monitor brain electrical signals \cite{Sekkal2022}. Other sources involve a combination of optical plethysmography and accelerometer signals \cite{Beattie_2017} \cite{Fedorin2019}, and more complex inputs like multi-channel polysomnogram (PSG) \cite{Li2021}. PSG encompasses diverse physiological continuous-time signals from multiple sensors, including EEG, electrooculography (EOG) for eye movement, electromyography (EMG) for muscle contractions, and monitors for respiration and body oxygen levels \cite{Li2021}.
+
+Although the different source signals, overally, they shared in common the complexity, high-dimensionality, noise and temporo-spatial dependency structure of these data types that make them suitable for analysis using deep learning models with their respective challenges \cite{thomas2018}
 
 
 \section{Future Directions}
 
-The ultimate goal is to apply a developed Deep Learning architecture to the dataset provided by \cite{child-mind-institute-detect-sleep-states}. Our primary motivation lies in the use of deep learning methods for time series analysis, particularly with the "Detect Sleep States" dataset furnished by the Child Mind Institute \cite{child-mind-institute-detect-sleep-states}, which consists of approximately 500 multi-day recordings from wrist-mounted accelerometers. The accelerometer data in the dataset was processed using R with the GGIR package \cite{Migueles2019GGIR}. The recordings are labeled with two event types: 'onset', indicating the start of sleep, and 'wakeup', marking its end. The primary objective is to identify these two events within the accelerometer data series.
+The ultimate goal is to apply a developed Deep Learning architecture to the dataset provided by \cite{child-mind-institute-detect-sleep-states}. Our primary motivation lies in the use of deep learning methods for time series analysis, particularly with the "Detect Sleep States" dataset furnished by the Child Mind Institute \cite{child-mind-institute-detect-sleep-states}. 
 
 
-\subsection{Exploratory Data Analysis}
+\subsection{Data}
 
-We are planning to start with Exploratory Data Analysis of the dataset % TODO
+ The dataset consists of approximately 500 multi-day recordings from wrist-mounted accelerometers. The accelerometer data in the dataset was processed using R with the GGIR package \cite{Migueles2019GGIR}. The recordings are labeled with two event types: 'onset', indicating the start of sleep, and 'wakeup', marking its end. The primary objective is to identify these two events within the accelerometer data series.
 
+\subsection{Model}
 
-\subsection{Model Evaluation}
+\subsection{Evaluation}
 
-For model evaluation as required by the competition, it is required to compute the average precision. By collecting the events within each \texttt{series\_id} from the data the Average Precision score will be computed for each \( \text{event} \times \text{tolerance} \) group \cite{child-mind-institute-detect-sleep-states}. The Average Precision is a measure that combines recall and precision for ranked retrieval results, for one information need, the average precision is the mean of the precision scores after each relevant document is retrieved \cite{Zhang2009}.
-
-\begin{equation*}
-\text{Average Precision} = \frac{\sum\nolimits_{r}P @ r}{R},
-\end{equation*}
-
-Where \( r \) is the rank of each relevant document, \( R \) is the total number of relevant documents, and \( P@r \) is the precision of the top-\textit{r} retrieved documents.
-
-In this evaluation, predictions that align with the ground-truth and exceed the threshold are labeled as TP. Predictions that don't match are labeled as FP, while ground-truths without a corresponding prediction are labeled as FN.
+To evaluate model classification, predictions that align with the ground truth and exceed the threshold are labeled as True Positives (TP). Predictions that do not match are labeled as False Positives (FP), while ground truths without a corresponding prediction are labeled as False Negatives (FN). Where,
 
 \[
 \text{Score}(x) = 
@@ -434,6 +435,20 @@ In this evaluation, predictions that align with the ground-truth and exceed the 
 \end{cases}
 \]
 
+It is necessary to compute the average precision \cite{child-mind-institute-detect-sleep-states}. By collecting the events within each \texttt{series\_id} from the data the Average Precision score will be computed for each \( \text{event} \times \text{tolerance} \) group \cite{child-mind-institute-detect-sleep-states}. The Average Precision is a measure that combines recall and precision for ranked retrieval results, for one information need, the average precision is the mean of the precision scores after each relevant document is retrieved \cite{Zhang2009}. Average Precision is defined as:
+
+\begin{equation*}
+    \text{AP} = \sum_n (R_n - R_{n-1}) P_n,
+\end{equation*}
+
+where \(P_n\) and \(R_n\) are the precision and recall at the nth threshold. With random predictions, the AP is the fraction of positive samples, the value from this function ranges from 0 and 1 and higher is better computed from the prediction scores, \cite{scikit-learn}\cite{flach2015}. Precision and Recall are computed as follows:
+
+\begin{equation*}
+    \text{precision} = \frac{tp}{tp + fp}, \quad
+    \text{recall} = \frac{tp}{tp + fn}, 
+\end{equation*}
+
+\vspace{.5em}
 
 \section{Conclusion}
 

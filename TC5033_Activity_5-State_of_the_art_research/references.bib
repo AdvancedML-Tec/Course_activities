@@ -22,6 +22,30 @@
     url="https://doi.org/10.1007/978-0-387-39940-9_482"
 }
 
+@inproceedings{flach2015,
+ author = {Flach, Peter and Kull, Meelis},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {C. Cortes and N. Lawrence and D. Lee and M. Sugiyama and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {Precision-Recall-Gain Curves: PR Analysis Done Right},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2015/file/33e8075e9970de0cfea955afd4644bb2-Paper.pdf},
+ volume = {28},
+ year = {2015}
+}
+
+@article{scikit-learn,
+    title={Scikit-learn: Machine Learning in {P}ython},
+    author={Pedregosa, F. and Varoquaux, G. and Gramfort, A. and Michel, V.
+         and Thirion, B. and Grisel, O. and Blondel, M. and Prettenhofer, P.
+         and Weiss, R. and Dubourg, V. and Vanderplas, J. and Passos, A. and
+         Cournapeau, D. and Brucher, M. and Perrot, M. and Duchesnay, E.},
+ journal={Journal of Machine Learning Research},
+ volume={12},
+ pages={2825--2830},
+ year={2011}
+}
+
 @article{Sundararajan2021,
     author  = {Kalaivani Sundararajan and Sonja Georgievska and Bart H. W. te Lindert and Philip R. Gehrman and Jennifer Ramautar and Diego R. Mazzotti and Séverine Sabia and Michael N. Weedon and Eus J. W. van Someren and Lars Ridder and Jian Wang and Vincent T. van Hees},
     title   = {Sleep classification from wrist-worn accelerometer data using random forests},
@@ -101,6 +125,76 @@
   doi={10.1123/jmpb.2018-0063}
 }
 
+@article{Stuburic2020,
+title = {A deep learning approach to detect sleep stages},
+journal = {Procedia Computer Science},
+volume = {176},
+pages = {2764-2772},
+year = {2020},
+note = {Knowledge-Based and Intelligent Information \& Engineering Systems: Proceedings of the 24th International Conference KES2020},
+issn = {1877-0509},
+doi = {https://doi.org/10.1016/j.procs.2020.09.280},
+url = {https://www.sciencedirect.com/science/article/pii/S1877050920321840},
+author = {Klara Stuburić and Maksym Gaiduk and Ralf Seepold},
+keywords = {sleep stages, deep learning, biosignal processing, convolutional neural network},
+abstract = {This paper presents the implementation of deep learning methods for sleep stage detection by using three signals that can be measured in a non-invasive way: heartbeat signal, respiratory signal, and movement signal. Since signals are measurements taken during the time, the problem is seen as time-series data classification. Deep learning methods are chosen to solve the problem are convolutional neural network and long-short term memory network. Input data is structured as a time-series sequence of mentioned signals that represent 30 seconds epoch, which is a standard interval for sleep analysis. The records used belong to the overall 23 subjects, which are divided into two subsets. Records from 18 subjects were used for training the data and from 5 subjects for testing the data. For detecting four sleep stages: REM (Rapid Eye Movement), Wake, Light sleep (Stage 1 and Stage 2), and Deep sleep (Stage 3 and Stage 4), the accuracy of the model is 55%, and F1 score is 44%. For five stages: REM, Stage 1, Stage 2, Deep sleep (Stage 3 and 4), and Wake, the model gives an accuracy of 40% and F1 score of 37%.}
+}
 
+@article{Sekkal2022,
+title = {Automatic sleep stage classification: From classical machine learning methods to deep learning},
+journal = {Biomedical Signal Processing and Control},
+volume = {77},
+pages = {103751},
+year = {2022},
+issn = {1746-8094},
+doi = {https://doi.org/10.1016/j.bspc.2022.103751},
+url = {https://www.sciencedirect.com/science/article/pii/S1746809422002737},
+author = {Rym Nihel Sekkal and Fethi Bereksi-Reguig and Daniel Ruiz-Fernandez and Nabil Dib and Samira Sekkal},
+keywords = {Sleep stage classification, EEG, Data preprocessing, Features selection, Machine learning, LSTM},
+abstract = {Background and objectives
+The classification of sleep stages is a preliminary exam that contributes to the diagnosis of possible sleep disorders. However, it is a tedious and time-consuming task when conducted manually by experts. Many studies explored ways of automating polysomnogram signals analysis. They are based on two main strategies: conventional machine learning and deep learning methods. The objective of this work is to carry out a comparative study on these two classes of models.
+Method
+A primary comparison of performance of these classifiers is carried out using eight conventional machine learning algorithms and a feed-forward neural networks to assess whether this latter method have definitely supplanted the first. As sleep epochs show inter-epochs correlation, a study of the distinctive influence of this temporal dependence on the classifiers performance is then conducted introducing for this purpose (uni- and bi-directional) long short-term memory networks. In a context of generalization of the use of wearable devices, a comparison of the classification methods examined is also carried out in their accuracy when dealing with a reduced number of channels. Finally, the robustness of the results obtained to the choice of features selection algorithms is discussed.
+Results and conclusion
+Our results show that support vector machine with radial basis function and random forest are just as valid for predicting sleep stages classification as feature-based neural networks with performance closed to the state of the art. This conclusion remains valid even after the introduction of inter-epochs temporal dependence, reduction of the number of channels or change in features selection method.}
+}
 
+@article{Li2021,
+  author = {Li, Hongyang and Guan, Yuanfang},
+  title = {DeepSleep convolutional neural network allows accurate and fast detection of sleep arousal},
+  journal = {Communications Biology},
+  volume = {4},
+  number = {1},
+  pages = {18},
+  year = {2021},
+  doi = {10.1038/s42003-020-01542-8},
+  url = {https://doi.org/10.1038/s42003-020-01542-8},
+  abstract = {Sleep arousals are transient periods of wakefulness punctuated into sleep. Excessive sleep arousals are associated with symptoms such as sympathetic activation, non-restorative sleep, and daytime sleepiness. Currently, sleep arousals are mainly annotated by human experts through looking at 30-second epochs (recorded pages) manually, which requires considerable time and effort. Here we present a deep learning approach for automatically segmenting sleep arousal regions based on polysomnographic recordings. Leveraging a specific architecture that ‘translates’ input polysomnographic signals to sleep arousal labels, this algorithm ranked first in the “You Snooze, You Win” PhysioNet Challenge. We created an augmentation strategy by randomly swapping similar physiological channels, which notably improved the prediction accuracy. Our algorithm enables fast and accurate delineation of sleep arousal events at the speed of 10 seconds per sleep recording. This computational tool would greatly empower the scoring process in clinical settings and accelerate studies on the impact of arousals.},
+  issn = {2399-3642}
+}
+
+@article{qing2023,
+  title={Latent class analysis by regularized spectral clustering},
+  author={Qing, Huan},
+  journal={arXiv preprint arXiv:2310.18727},
+  year={2023},
+  institution={School of Economics and Finance, Chongqing University of Technology, Chongqing, 400054, China}
+}
+
+@article{thomas2018,
+  author       = {Armin W. Thomas and
+                  Hauke R. Heekeren and
+                  Klaus{-}Robert M{\"{u}}ller and
+                  Wojciech Samek},
+  title        = {Interpretable LSTMs For Whole-Brain Neuroimaging Analyses},
+  journal      = {CoRR},
+  volume       = {abs/1810.09945},
+  year         = {2018},
+  url          = {http://arxiv.org/abs/1810.09945},
+  eprinttype    = {arXiv},
+  eprint       = {1810.09945},
+  timestamp    = {Sat, 23 Jan 2021 01:19:27 +0100},
+  biburl       = {https://dblp.org/rec/journals/corr/abs-1810-09945.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
 
