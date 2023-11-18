@@ -500,7 +500,8 @@ h_{t-1}^{(k)}
 
 Our neural network architecture employs an LSTM to incorporate the classifications of previous inputs into the current sample's classification. This approach is suitable to looking back to inform the present, a method particularly suited for cyclical patterns like sleep stages \cite{Stuburic2020}, which recur throughout the night. Therefore, LSTMs, with their recurrent nature, could be an ideal choice for this type of cyclic temporal problems.
 
-As shown in Figure \ref{fig:neuralnetwork} We are proposing a starting neural network architecture with the following blocks where consists of a LSTM layer of 64 units, ideal for processing sequences by capturing dependencies from prior inputs. This is followed by a Dense layer, the size of which matches the number of classification categories in your problem, in this case for our binary classification problem \(n_classes = 2\). The final component is a softmax activation function, applied to convert the output into a probability distribution across the predicted classes. 
+As shown in Figure \ref{fig:neuralnetwork} 
+We are proposing a starting neural network architecture with the following blocks where consists of a LSTM layer of 64 units, ideal for processing sequences by capturing dependencies from prior inputs. This is followed by a Dense layer, the size of which matches the number of classification categories in your problem, in this case for our binary classification problem \(n_classes = 2\). The final component is a softmax activation function, applied to convert the output into a probability distribution across the predicted classes. 
 
 \begin{figure}[h]
   \centering
@@ -512,7 +513,7 @@ As shown in Figure \ref{fig:neuralnetwork} We are proposing a starting neural ne
 \end{figure}
 
 
-Is important to check if the impact to work directly with raw signals, the effects of the noise and the implications of not doing feature extraction. Subsequently, with the results of the first trials plan to transition to more complex architectures and work more in data pre-processing if needed.
+Is important to check if the impact to work directly with raw signals, the effects of the noise and the implications of not doing feature extraction do not affect performance in the training of the model. Subsequently, with the results of the first trials we might plan work more in data pre-processing if needed or even transition to more complex architectures. Other point of consideration is that one of the common problems is that the time-series sequences can be extremely long and therefore can be certain limitations with its performance \cite{Aggarwal2018}.
 
 
 \subsection{Evaluation}
