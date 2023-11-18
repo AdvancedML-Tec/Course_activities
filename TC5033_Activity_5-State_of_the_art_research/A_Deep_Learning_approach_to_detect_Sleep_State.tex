@@ -115,7 +115,7 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
   % \graphicspath{{../pdf/}{../jpeg/}}
   % and their extensions so you won't have to specify these with
@@ -418,6 +418,10 @@ to classify phonemes \cite{Graves2005}, it incorporates a comprehensive error gr
 
 Is important to remark that Fiorillo et al. \cite{Fiorillo2019} present a systematic and comprehensive review of deep learning algorithms applied to sleep scoring. The paper thoroughly examines the latest applications and compares them to other methodologies, it concluded that deep learning methods offer numerous advantages. Notably, these algorithms can be applied directly to raw data in comparison with other approaches that involved feature extraction \cite{Stuburic2020} \cite{michielli2019}, therefore requiring minimal artifact removal. Furthermore, they are capable of unveiling hidden information that traditional feature-based approaches might overlook.
 
+Finally, in the work of \cite{Stuburic2020} they implemented a LSTM architecture with the raw signals from EEG without any prior feature extraction. The preprocessing involved reducing noise and smoothing the signal using a median filter and, in some cases, applying signal flipping or baseline subtraction. LSTM were designed to learn features directly from these raw, preprocessed signals without any feature extraction step, they achieved an accuracy of 80\% in 5-class classification.
+
+To address our particular challenge, we propose initially implementing an LSTM architecture without feature extraction. This approach is selected based on revisited literature that emphasizes its effectiveness in capturing temporal dependencies in sequential data, a key characteristic of our problem domain. Subsequent stages of our research will involve evaluating the performance of this model and discussing potential enhancements. These may include the integration of feature extraction techniques or the exploration of other Deep Learning architectures, as needed.
+
 
 \section{Future Directions}
 
@@ -426,9 +430,90 @@ The ultimate goal is to apply a developed Deep Learning architecture to the data
 
 \subsection{Data}
 
- The dataset consists of approximately 500 multi-day recordings from wrist-mounted accelerometers. The accelerometer data in the dataset was processed using R with the GGIR package \cite{Migueles2019GGIR}. The recordings are labeled with two event types: 'onset', indicating the start of sleep, and 'wakeup', marking its end. The primary objective is to identify these two events within the accelerometer data series.
+ \begin{figure*}[ht]
+    \centering
+    \includegraphics[width=1\linewidth]{TC5033_Activity_5-State_of_the_art_research/figures/time_series.png}
+    \caption{Accelerometer training data. Plot of \texttt{step} againts \texttt{anglez} showing \texttt{event} state}
+    \label{fig:accelerometerdata}
+\end{figure*}
+
+ The dataset consists of approximately 500 multi-day recordings from wrist-mounted accelerometers. The accelerometer data in the dataset was processed using R with the GGIR package \cite{Migueles2019GGIR}. The recordings are labeled with two event types: 'onset', indicating the start of sleep, and 'wakeup', marking its end. The primary objective is to identify these two events within the accelerometer data series, this primarily represents a binary classification task. As shown in Figue \ref{fig:accelerometerdata} The data represents series of continuous recording of the accelerometer data for a single subject spanning many days, where we can find:
+
+
+
+ \begin{itemize}
+  \item \texttt{series\_id}: Unique identifier for each accelerometer series.
+    \item \texttt{step}: An integer timestep for each observation within a series. It is uniqute within a series
+  \item \texttt{event}: The type of event, whether onset or wakeup. 
+  \item \texttt{anglez}: As calculated and described by the GGIR package, z-angle is a metric derived from individual accelerometer components that is commonly used in sleep detection, and refers to the angle of the arm relative to the vertical axis of the body \cite{Migueles2019GGIR}.
+  \item \texttt{enmo}: As calculated and described by the GGIR package, ENMO is the Euclidean Norm Minus One of all accelerometer signals, with negative values rounded to zero. While no standard measure of acceleration exists in this space, this is one of the several commonly computed features \cite{Migueles2019GGIR}.
+\end{itemize}
+
+
 
 \subsection{Model}
+
+We are planning to implement an architecture that incorporates an LSTM cell into our sequence of input data. In this cell architecture, the intermediate variables \( \overline{i}, \overline{f}, \overline{o} \), corresponding to the \textit{input}, \textit{forget}, and \textit{output} gates, play crucial roles in updating the cell and hidden states. The determination of the hidden state vector \( \overline{h}^{(k)}_{t} \) and the cell state vector \( \overline{c}^{(k)}_{t} \) is a multi-step process that starts by computing the intermediate variables, followed by the computation of the hidden states from these intermediates \cite{Aggarwal2018}. The updates are as follows:
+
+\vspace{0.5em}
+
+\textbf{[Setting up intermediates]}
+\begin{align*}
+\begin{matrix}
+\text{Input Gate:} \\
+\text{Forget Gate:} \\
+\text{Output Gate:} \\
+\text{New C.-State:} \\
+\end{matrix} &\begin{bmatrix}
+\overline{i} \\ 
+\overline{f} \\
+\overline{o} \\
+\overline{c} \\
+\end{bmatrix} =
+\begin{bmatrix}
+\text{sigm} \\
+\text{sigm} \\
+\text{sigm} \\
+\tanh \\
+\end{bmatrix} W^{(k)}
+\begin{bmatrix}
+h_{t}^{(k-1)} \\
+h_{t-1}^{(k)}
+\end{bmatrix}
+\end{align*}
+
+\textbf{[Selectively forget and add to long-term memory]}
+
+\begin{equation*}
+\begin{aligned}
+    \overline{c}^{(k)}_{t} = \overline{f} \odot \overline{c}^{(k)}_{t-1} + \overline{i} \odot \overline{c} \\
+\end{aligned}
+\end{equation*}
+
+\textbf{[Selectively leak long-term memory to hidden state]}
+
+\begin{equation*}
+\begin{aligned}
+    \overline{h}^{(k)}_{t} &= o_t \odot \tanh(\overline{c}^{(k)}_{t})
+\end{aligned}
+\end{equation*}
+
+Our neural network architecture employs an LSTM to incorporate the classifications of previous inputs into the current sample's classification. This approach is suitable to looking back to inform the present, a method particularly suited for cyclical patterns like sleep stages \cite{Stuburic2020}, which recur throughout the night. Therefore, LSTMs, with their recurrent nature, could be an ideal choice for this type of cyclic temporal problems.
+
+As shown in Figure \ref{fig:neuralnetwork} We are proposing a starting neural network architecture with the following blocks where consists of a LSTM layer of 64 units, ideal for processing sequences by capturing dependencies from prior inputs. This is followed by a Dense layer, the size of which matches the number of classification categories in your problem, in this case for our binary classification problem \(n_classes = 2\). The final component is a softmax activation function, applied to convert the output into a probability distribution across the predicted classes. 
+
+\begin{figure}[h]
+  \centering
+  \[
+  \xrightarrow{\text{input}} \boxed{\text{LSTM} (64)} \rightarrow \boxed{\text{Dense} (n_{\text{classes}})} \xrightarrow{\text{softmax}}
+  \]
+  \caption{Neural Network for accelerometer data classification}
+  \label{fig:neuralnetwork}
+\end{figure}
+
+
+Is important to check if the impact to work directly with raw signals, the effects of the noise and the implications of not doing feature extraction. Subsequently, with the results of the first trials plan to transition to more complex architectures and work more in data pre-processing if needed.
+
 
 \subsection{Evaluation}
 
@@ -454,7 +539,7 @@ where \(P_n\) and \(R_n\) are the precision and recall at the nth threshold. Wit
 
 \begin{equation*}
     \text{precision} = \frac{tp}{tp + fp}, \quad
-    \text{recall} = \frac{tp}{tp + fn}, 
+    \text{recall} = \frac{tp}{tp + fn} 
 \end{equation*}
 
 \vspace{.5em}
@@ -462,9 +547,6 @@ where \(P_n\) and \(R_n\) are the precision and recall at the nth threshold. Wit
 \section{Conclusion}
 
 To address this challenge, we want to continue over implementing deep learning techniques, despite evidence from \cite{Sundararajan2021} indicating that traditional methods such as Random Forest outperform ResNets. Our motivation stems from the insights gained from \cite{Zhang2023}, where the authors present the Time-Series Neural Network (TNN). This method, which incorporates a Kernel Filter alongside a Time Attention Mechanism \cite{Zhang2023}, has demonstrated high accuracy in forecasting, will be interesting to evaluate their perfomance on classification. In our specific context, we are in the process of evaluating whether Long Short-Term Memory Networks (LSTM), Graph Neural Networks (GNN), or potentially an attention-based mechanism would be most suitable for our application.
-
-In the work of \cite{Stuburic2020} they implemented a LSTM architecture with the raw signals from EEG without any prior feature extraction. The preprocessing involved reducing noise and smoothing the signal using a median filter and, in some cases, applying signal flipping or baseline subtraction. LSTM were designed to learn features directly from these raw, preprocessed signals without any feature extraction step, they achieved an accuracy of 80\% in 5-class classification.
-
 
 
 % use section* for acknowledgment
